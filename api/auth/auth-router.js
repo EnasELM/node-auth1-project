@@ -102,7 +102,7 @@ const { checkPasswordLength, checkUsernameExists,checkUsernameFree } = require('
           if (err) {
             next(err)
           } else {
-            // manually set a cookie with an exp date in the past
+            
             res.json({message: "logged out"})
           }
         })
