@@ -31,7 +31,11 @@ const Users = require('./users-model')
   router.get("/", restrict, async (req, res, next) => {
    try{
      const users = await Users.find()
+     if (users){ 
      res.json(users)
+     } else {
+       next({status: 401,  message: "You shall not pass!"})
+     }
    }catch(err){
            next(err)
    }

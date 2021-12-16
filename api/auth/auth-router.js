@@ -70,10 +70,11 @@ const { checkPasswordLength, checkUsernameExists,checkUsernameFree } = require('
       // 1- pull u and p from req.body
       const { password } = req.body
      if(bcrypt.compareSync(password, req.user.password)){
-      req.session.user = res.user
+      req.session.user = req.user
       res.json({
-        message: `welcome ${req.user.username}`
+        message: `Welcome ${req.user.username}!`, status :200
       })
+      
      }else {
       next({ message: 'invalid credentials', status: 401 })
      }     
@@ -98,16 +99,16 @@ const { checkPasswordLength, checkUsernameExists,checkUsernameFree } = require('
   router.get('/logout', (req, res, next) => {
     
       if (req.session.user) {
-        req.session.destroy((err) => {
+        req.session.destroy(err => {
           if (err) {
             next(err)
           } else {
             
-            res.json({message: "logged out"})
+            res.json({ message: "logged out", status:200 })
           }
         })
       } else {
-        res.json({message: 'no session'})
+        res.json({ message: 'no session', status:200 })
       }
     
   })
